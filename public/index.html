@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DoorPi</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+	<style type="text/css">
+		html {
+			background: url("/imgs/lock_bg.jpg") no-repeat center center fixed; 
+			-webkit-background-size: cover;
+			-moz-background-size: cover;
+			-o-background-size: cover;
+			background-size: cover;
+			height:100%;
+		}
+		body {
+			background: rgba(0,0,0,0.6);
+			padding-top: 50px;
+			color: #f0f0f0;
+			height:100%;
+		}
+		nav.navbar-inverse {
+			background: rgba(48, 48, 48, 0.6);
+		}
+		button.btn {
+			background: rgba(192,192,192,0.6);
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+			<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">PiDoor</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+			<ul class="nav navbar-nav">
+			<li class="active"><a href="#">Doors</a></li>
+			</ul>
+			</div><!--/.nav-collapse -->
+		</div><!-- /.container -->
+	</nav>
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-3">
+				<h1>Doors</h1>
+
+				<div class="row">
+					<div class="door-list col-xs-12 col-col-sm-6 col-md-6">
+						<button class="btn btn-lg btn-block" id="28fjs8h1if99">Lobby Door</button>
+						<button class="btn btn-lg btn-block" id="28fjs8h1if99">Lobby Door</button>
+						<button class="btn btn-lg btn-block" id="28fjs8h1if99">Lobby Door</button>
+						<button class="btn btn-lg btn-block" id="28fjs8h1if99">Lobby Door</button>
+						<button class="btn btn-lg btn-block" id="28fjs8h1if99">Lobby Door</button>
+					</div>
+				</div>
+			</div>
+		</div><!-- /.row -->
+	</div><!-- /.container -->
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$(document).on('click', 'div.door-list button', function(evt){
+		var btn = $(evt.target);
+		console.log('Clicked! '+btn.attr('id'));
+		$.ajax({
+			url:'/doors/'+btn.attr('id'),
+			method:'PUT',
+			complete:function(){
+				console.log('opened '+btn.attr('id'));
+			}
+		});
+	});
+});
+</script>
+</body>
+</html>
